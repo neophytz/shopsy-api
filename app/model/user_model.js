@@ -55,6 +55,11 @@ const UserSchema = new Schema({
             default: "",
         }
     },
+    isDeleted: {
+        type: Boolean,
+        default: false,
+        required: false,
+    }
 }, {timestamps: true});
 
 module.exports = mongoose.model('User', UserSchema);

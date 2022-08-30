@@ -1,35 +1,11 @@
 require('dotenv').config();
 
-const express = require('express'),
-    bodyParser = require('body-parser'),
-    cors = require('cors'),
-    mongoose = require('mongoose');
-
-const app = express();
-
-app.use(cors());
-
-app.use(bodyParser.json());
+// this file is used for starting the server (listening) and connecting to the db.
+const mongoose = require('mongoose');
+const app = require('./app/app');
 
 // shopping api
-
-app.use('/cart', require('./app/router/cart_router'));
-app.use('/user', require('./app/router/user_router'));
-
-/**
- * /cart 
- * /order 
- * /products 
- * /user 
- * /whishlist -> task 
- * /offers -> task
- * /reviews -> task
- * /return -> task
-*/
-
-
 const PORT = process.env.PORT || 8080;
-
 app.listen(PORT, () => console.log(`server started on port:${PORT}`));
 
 const DB_URI = process.env.DB_URI;
