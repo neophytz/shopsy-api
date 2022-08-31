@@ -6,7 +6,7 @@ const app = require('./app/app');
 
 // shopping api
 const PORT = process.env.PORT || 8080;
-app.listen(PORT, () => console.log(`server started on port:${PORT}`));
+app.listen(PORT, () => console.log(`Server started on port:${PORT}`));
 
 const DB_URI = process.env.DB_URI;
 mongoose.Promise = global.Promise;
@@ -17,7 +17,7 @@ const _option = {
     useNewUrlParser: true,
 };
 
-mongoose.connect(DB_URI, _option).then(()=> console.log(`DB connected`)).catch(err=> {
+mongoose.connect(DB_URI, _option).then(()=> console.log(`DB connected`)).catch(err => {
     console.error(err);
     // optional things - if you want you can also terminate the server
     process.exit(1); // 1 means some error has occurred.
