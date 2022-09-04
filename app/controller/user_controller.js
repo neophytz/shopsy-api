@@ -5,13 +5,12 @@ const getUserItem = async (request, response) => {
     try {
         const {pageNo, perPage} = request.query;
         const users = await User.find({}).skip(pageNo * (perPage - 1)).limit(perPage);
-        return response.status(200).json(http_formatter(users));
+        return response.status(200).json(http_formatter( users,"users got succesfully"));
     } catch (error) {
         console.log(error);
         return response.status(400).json(http_formatter(error, "Something went wrong, please try again", false));
     }
 }
-
 const createNewUser = async (request, response) => {
     try {
         const user = await User.create(request.body);

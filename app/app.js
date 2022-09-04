@@ -2,7 +2,8 @@ const express = require('express'),
     bodyParser = require('body-parser'),
     cors = require('cors'),
     http_formatter = require('./util/http_formatter');
-
+const product_model = require('./model/product_model');
+const product_route = require('./router/product_route')
 const app = express();
 
 const whitelist = [
@@ -37,6 +38,7 @@ app.use(bodyParser.urlencoded({extended: true}));
 
 app.use('/cart', require('./router/cart_router'));
 app.use('/user', require('./router/user_router'));
+app.use('/product', product_route)
 
 // error handling
 // ! must always come in the end of defining all the routes of the application
