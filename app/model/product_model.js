@@ -28,6 +28,11 @@ const productSchema = new Schema({
         min: 0,
         trim: true,
     },
+    isDeleted: {
+        type: Boolean,
+        required: false,
+        default: false,
+    }
 }, {timestamps: true, versionKey: false});
 
 module.exports = mongoose.model('Product', productSchema);

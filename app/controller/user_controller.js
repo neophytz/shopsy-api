@@ -4,7 +4,7 @@ const http_formatter = require('../util/http_formatter');
 const getUserItem = async (request, response) => {
     try {
         const {pageNo, perPage} = request.query;
-        const users = await User.find({}).skip(pageNo * (perPage - 1)).limit(perPage);
+        const users = await User.find({}).skip(perPage * (pageNo - 1)).limit(perPage);
         return response.status(200).json(http_formatter( users,"users got succesfully"));
     } catch (error) {
         console.log(error);
