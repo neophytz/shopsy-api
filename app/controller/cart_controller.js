@@ -1,9 +1,10 @@
+const res = require('express/lib/response');
 const Cart = require('../model/cart_model');
 const http_formatter = require('../util/http_formatter');
 
 const getCartItem = async (request, response) => {
     try {
-        const carts = await Cart.find({}).populate('user products');
+        const carts = await Cart.find({}).populate('user products')
         // if you want to select and do multiple populate
         // .populate({
         //     path: 'user',
@@ -15,10 +16,9 @@ const getCartItem = async (request, response) => {
         // });
         return response.status(200).json(http_formatter(carts));
     } catch (error) {
-        
+        return response.status(400).json(http_formatter(error,"something went wrong",false))
     }
 }
-
 const getUserCart = (request, response) => {
 
 }

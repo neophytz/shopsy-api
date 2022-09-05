@@ -26,6 +26,9 @@ const userLogin = (request, response) => {
 }
 
 const updateUser = async (request, response) =>  {
+    try {
+        
+    
     const {user_id} = request.params;
     if(!user_id) {
         throw (new Error('Product ID is mandatory'));
@@ -49,6 +52,9 @@ const address = request.body.address;
 
   const __updateduser = await current_user.save();
   return response.status(200).json(http_formatter(__updateduser,"user updated succesfully")) 
+} catch (error) {
+    return response.status(400).json(http_formatter(error,"something went wrong"))
+}
 }
 
 const deleteUser = (request, response) => {
