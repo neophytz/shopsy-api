@@ -6,6 +6,7 @@ Router.get('/all', _controller.getCartItem); // admin level
 Router.get('/:user_id', _controller.getUserCart);
 Router.post('/', _controller.createNewCart);
 Router.put('/', _controller.updateCart);
+Router.put('/:user_id', _controller.addProductToCart);
 Router.delete('/', _controller.deleteCart);
 
 module.exports = Router;
