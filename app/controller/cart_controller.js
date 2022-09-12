@@ -44,8 +44,9 @@ const addProductToCart = async (request, response) => {
     const {user_id} = request.params;
     const {products} = request.body;
     try {
-            
-        const original_cart = await Cart.findById(user_id);
+        
+        // const doesUserExist = await User.findById(user_id);
+        const original_cart = await Cart.findOne({user: user_id});
         if(!original_cart) {
             return response.status(400).json(http_formatter({}, "No cart found", false));
         }
@@ -54,7 +55,7 @@ const addProductToCart = async (request, response) => {
         // things to be careful - 
         /**
          * complete card will be shared from the FE
-         */
+        */
         
         // const isInvalidCart = products.some(el => !el.product || !el.quantity);
         // for(const el of products) {
@@ -63,8 +64,11 @@ const addProductToCart = async (request, response) => {
         //     }
         // }
 
+
+        // products = [{quantity: 0, product: 'something'}, {quantity: 0}]
+
         if(!Array.isArray(products) || products.some(el => !el.product || !el.quantity)) {
-            return response.status(400).json(http_formatter({}, "Invalid cart, please check", false));
+            return response.status(400).json(http_formatter({}, "Invalid item being added to cart, please check", false));
         }
 
         original_cart.products = products;
@@ -75,8 +79,14 @@ const addProductToCart = async (request, response) => {
     }
 }
 
-const deleteCart = (request, response) => {
-
+const deleteCart = async (request, response) => {
+    try {
+        const {card_id} = request.params;
+        const deleted = await Cart.findOneAndUpdate({_id: card_id}, {isDeleted: true});
+        return response.json(http_formatter(deleted, "Card deleted successfully", true));
+    } catch (error) {
+        return response.status(400).json(http_formatter(error, "Could not delete cart, Please retry after sometime.", false));
+    }
 }
 
 module.exports = { 

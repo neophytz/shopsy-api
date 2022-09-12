@@ -24,11 +24,16 @@ const cartSchema = new Schema({
         type: Schema.Types.ObjectId,
         ref: 'User',
         required: true,
+        unique: true,
     },
     products: {
         type: [ProductSchema],
         default: [],
         required: false,
+    },
+    isDeleted: {
+        type: Boolean,
+        default: false,
     }
 }, {timestamps: true, versionKey: false});
 
